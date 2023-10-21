@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, {Component} from 'react';
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+           pageName:'Home'
+        }
+    }
+
+
+
+    changeMainPage = (page)=>
+    {
+        this.setState({pageName: page})
+    }
+
+    render() {
+        return (
+            <div className="container-fluid">
+                <Header changePage={this.changeMainPage}/>
+                <Main pageToRender={this.state.pageName}/>
+                <Footer changePage={this.changeMainPage}/>
+            </div>
+        );
+    }
 }
 
 export default App;
+
+
+
