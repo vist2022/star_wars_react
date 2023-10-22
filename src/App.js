@@ -12,12 +12,10 @@ class App extends Component {
            pageName:'Home'
         }
     }
-
-
-
     changeMainPage = (page)=>
     {
-        this.setState({pageName: page})
+        if (this.state.pageName !== page)
+            this.setState({pageName: page}) ;
     }
 
     render() {
@@ -25,7 +23,7 @@ class App extends Component {
             <div className="container-fluid">
                 <Header changePage={this.changeMainPage}/>
                 <Main pageToRender={this.state.pageName}/>
-                <Footer changePage={this.changeMainPage}/>
+                <Footer changePage={this.changeMainPage} pageToRender={this.state.pageName}/>
             </div>
         );
     }
