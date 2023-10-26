@@ -5,10 +5,9 @@ import StarWars from "../components/StarWars";
 import Contacts from "../components/Contacts";
 
 
-
 export const pages =
     {
-        homePage:<Home/>,
+        homePage: <Home/>,
         navPages: {
             Home: <Home/>,
             About: <About/>,
@@ -17,3 +16,5 @@ export const pages =
         },
         SendEmailForm: <SendEmailForm/>,
     }
+
+
