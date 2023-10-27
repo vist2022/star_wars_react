@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import {getFilmByID} from "../api/api";
 import {getRandomEpisode} from "../api/api";
-
-const BASE_URL = 'https://sw-info-api.herokuapp.com/v1';
-
+import {period} from "../utils/constants";
 
 class FarGalaxy extends Component {
-
 
     constructor(props) {
         super(props);
@@ -16,23 +12,31 @@ class FarGalaxy extends Component {
             title: '',
             episode_number: ''
         }
-
-
     }
-
 
     componentDidMount = async () => {
 
-        const episodeNumber = await getRandomEpisode();
-        const episodeInfo = await getFilmByID(episodeNumber);
-        this.setState({
-            ...this.state,
-            opening_crawl: episodeInfo.opening_crawl,
-            title: episodeInfo.title,
-            episode_number: episodeInfo.episode_id,
-            isLoading: false,
+        const episode_number = sessionStorage.getItem('episode_number');
+        const title = sessionStorage.getItem('title');
+        const opening_crawl = sessionStorage.getItem('opening_crawl');
+        const createTime = sessionStorage.getItem('createTime')
 
-        });
+        if (episode_number && title && opening_crawl || (parseInt(createTime) + period) > Date.now())
+            this.setState({episode_number, title, opening_crawl, isLoading: false})
+        else {
+            const episodeInfo = await getRandomEpisode();
+            this.setState({
+                opening_crawl: episodeInfo.opening_crawl,
+                title: episodeInfo.title,
+                episode_number: episodeInfo.episode_id,
+                isLoading: false,
+            });
+            sessionStorage.setItem('episode_number', episodeInfo.episode_id);
+            sessionStorage.setItem('title', episodeInfo.title);
+            sessionStorage.setItem('opening_crawl',episodeInfo.opening_crawl);
+            sessionStorage.setItem('createTime', Date.now().toString());
+           // console.log(Date.now().toString())
+        }
 
     }
 
@@ -43,11 +47,13 @@ class FarGalaxy extends Component {
                     <span className="visually-hidden">Loading...</span>
                 </div>
             </div>
+
         const info =
             <div>
                 <p className="farGalaxy fs-5">EPISODE {this.state.episode_number} : {this.state.title}</p>
                 <p className="farGalaxy">{this.state.opening_crawl}</p>
             </div>
+
         const context = this.state.isLoading === true ? spinner : info;
         return (
             <> {context}</>

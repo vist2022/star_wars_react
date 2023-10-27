@@ -17,4 +17,6 @@ export const pages =
         SendEmailForm: <SendEmailForm/>,
     }
 
+export const BASE_URL = 'https://sw-info-api.herokuapp.com/v1';
+export const period = 1000 * 60 * 60 * 24 * 15 //period to update data from sever 15 days
 

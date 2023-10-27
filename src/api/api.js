@@ -1,17 +1,11 @@
-const BASE_URL = 'https://sw-info-api.herokuapp.com/v1';
+import {BASE_URL} from "../utils/constants";
 
 
 export const getRandomEpisode = async () => {
-    const response = await fetch(`${BASE_URL}/films`)
-    const data = await response.json()
+    const response = await fetch(`${BASE_URL}/films`);
+    const data = await response.json();
+    const randomIndex = Math.floor(Math.random() * (data.length - 1) + 1);
+    return data[randomIndex]
 
-    return Math.floor(Math.random() * (data.length - 1)+1);
-}
-
-export const getFilmByID = (num) => {
-
-    return fetch(`${BASE_URL}/films/${num}`)
-        .then(response => response.json())
-        .then(data => data);
 }
 
