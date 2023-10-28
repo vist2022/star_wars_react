@@ -1,27 +1,62 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {aboutUpdatePeriod} from "../utils/constants";
+import {getPersonInfo} from "../api/api";
+import Spinner from "./Spinner";
 
-const About = () => {
-    return (
-        <div className={'container w-100'}>
-            <p className={'text-center fs-6'}>
-                Originally a farmer on Tatooine living with his uncle and aunt, Luke becomes a pivotal figure in the
-                Rebel Alliance's struggle against the Galactic Empire. The son of fallen Jedi Knight Anakin Skywalker
-                (turned Sith Lord Darth Vader) and Padmé Amidala, Luke is the twin brother of Rebellion leader Princess
-                Leia and eventual brother-in-law of the smuggler Han Solo. Luke trains to be a Jedi under Jedi Masters
-                Obi-Wan Kenobi and Yoda and rebuilds the Jedi Order. He later trains his nephew Ben Solo and mentors
-                Rey. Though Luke dies at the end of The Last Jedi, he returns as a Force spirit in The Rise of
-                Skywalker, encouraging Rey to face her grandfather, the resurrected Emperor Palpatine. At the end of the
-                film, the spirits of Luke and Leia give Rey their blessing to adopt the Skywalker surname and continue
-                their family's legacy.
+class About extends Component {
+    constructor(props) {
+        super(props);
+        this.state =
+            {
+                "name": null,
+                "birth_year": null,
+                "gender": null,
+                "eye_color": null,
+                "skin_color": null,
+                "hair_color": null,
+                "height": null,
+                "mass": null,
+                 isLoading: true
+            }
+    }
 
-                The character also briefly appears in the prequel film Episode III – Revenge of the Sith as an infant,
-                portrayed by Aidan Barton, and in the Disney+ series Obi-Wan Kenobi as a child, portrayed by Grant
-                Feely. In the de-canonized Star Wars Expanded Universe (renamed Legends), Luke is a main character in
-                many stories set after Return of the Jedi, which depict him as a powerful Jedi Master, the husband of
-                Mara Jade, father of Ben Skywalker, and maternal uncle of Jaina, Jacen and Anakin Solo.
-            </p>
-        </div>
-    );
-};
+    componentDidMount = async ()=> {
+        const person = '2'
+
+        let personInfo = JSON.parse(localStorage.getItem(person));
+        let lastAboutUpdate = localStorage.getItem('lastAboutUpdate')
+
+        if (personInfo && (parseInt(lastAboutUpdate) + aboutUpdatePeriod) > Date.now()) {
+            this.setState({...personInfo, isLoading: false});
+        } else {
+            personInfo = await getPersonInfo(person);
+            this.setState({...personInfo, isLoading: false});
+            localStorage.setItem(person, JSON.stringify(personInfo))
+            localStorage.setItem('lastAboutUpdate', Date.now().toString())
+        }
+    }
+
+
+
+    render() {
+        const info =
+            <div className={'container w-100'}>
+                <p className={'text-center fs-1'}>My name is {this.state.name}</p>
+                <p className={'text-center fs-3'}>I was born in {this.state.birth_year}. I'm {this.state.gender}</p>
+                <p className={'text-center fs-3'}>I have {this.state.eye_color} eyes, {this.state.skin_color} skin
+                    and {this.state.hair_color} hair</p>
+                <p className={'text-center fs-3'}>
+                    My height is {this.state.height}
+                    cm and my mass is {this.state.mass} kilo
+                </p>
+            </div>
+        const context = this.state.isLoading === true ? <Spinner/> : info;
+        return (
+            <div className={'container w-100'}>
+                {context}
+            </div>
+        );
+    }
+}
 
 export default About;

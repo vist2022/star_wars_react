@@ -8,7 +8,7 @@ const Navigation = (props) => {
         <nav>
             <ul className="nav fixed-top mt-1 ms-5">
                 {Object.keys(pages.navPages).map((item) =>
-                    <NavItem key={item} name={item} text={item} changePage={props.changePage}/>)}
+                    <NavItem key={item} text={item} changePage={props.changePage}/>)}
             </ul>
         </nav>
     );

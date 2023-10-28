@@ -9,3 +9,15 @@ export const getRandomEpisode = async () => {
 
 }
 
+export  const getPersonInfo = async (person)=>
+{
+    const response = await fetch(`${BASE_URL}/peoples/${person}`);
+    return await response.json();
+}
+
+export const getAllPlanets = async ()=>
+{
+    const response = await fetch(`${BASE_URL}/planets`);
+    return await response.json();
+}
+

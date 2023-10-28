@@ -4,6 +4,8 @@ import Friends from "./Friends";
 import FarGalaxy from "./FarGalaxy";
 
 class Home extends Component {
+
+
     render() {
         return (
             <main className="clearfix">
