@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 
 import React, {Component} from 'react';
 import {pages} from "./utils/constants";
+import {contextStarWars} from "./utils/contextStarWars";
 
 class App extends Component {
     constructor(props) {
@@ -22,9 +23,16 @@ class App extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <Header changePage={this.changeMainPage}/>
-                <Main pageToRender={this.state.pageName}/>
-                <Footer changePage={this.changeMainPage}/>
+                <contextStarWars.Provider value={{
+                    pageName : this.state.pageName,
+                    changePage : this.changeMainPage
+                }}>
+
+                    <Header/>
+                    <Main/>
+                    <Footer/>
+                </contextStarWars.Provider>
+
             </div>
         );
     }

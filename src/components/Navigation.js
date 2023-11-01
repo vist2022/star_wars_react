@@ -3,12 +3,12 @@ import {pages} from "../utils/constants";
 import NavItem from "./NavItem";
 
 
-const Navigation = (props) => {
+const Navigation = () => {
     return (
         <nav>
             <ul className="nav fixed-top mt-1 ms-5">
                 {Object.keys(pages.navPages).map((item) =>
-                    <NavItem key={item} text={item} changePage={props.changePage}/>)}
+                    <NavItem key={item} text={item}/>)}
             </ul>
         </nav>
     );

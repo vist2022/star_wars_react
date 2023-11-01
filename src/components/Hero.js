@@ -1,11 +1,16 @@
 import React from 'react';
-import photo from '../styles/images/main.jpg'
+import {contextStarWars} from "../utils/contextStarWars";
 
 const Hero = () => {
     return (
-        <section className="float-start w-25 my-1 mx-3">
-            <img className="w-100" src={photo} alt={'hero'}/>
-        </section>
+        <contextStarWars.Consumer>
+            {value =>
+                <section className="float-start w-25 my-1 mx-3">
+                    <img className="w-100" src={value.mainImg} alt={'hero'}/>
+                </section>
+            }
+        </contextStarWars.Consumer>
+
     );
 };
 

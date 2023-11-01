@@ -1,11 +1,19 @@
 import React from 'react';
-// import img from '../styles/images/friend1.jpg'
+import {contextStarWars} from "../utils/contextStarWars";
+
 
 const Friend = ({image}) => {
     return (
-        <>
-            <img className="col-4 p-1" src={image} alt="friend"/>
-        </>
+        <contextStarWars.Consumer>
+            {value =>
+                <>
+                    <img
+                        className="col-4 p-1"
+                        src={image} alt="friend"
+                        onClick={()=>value.changeImages(image)}/>
+                </>
+            }
+        </contextStarWars.Consumer>
     );
 };
 

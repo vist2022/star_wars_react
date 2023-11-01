@@ -21,7 +21,7 @@ class About extends Component {
     }
 
     componentDidMount = async ()=> {
-        const person = '2'
+        const person = '1'
 
         let personInfo = JSON.parse(localStorage.getItem(person));
         let lastAboutUpdate = localStorage.getItem('lastAboutUpdate')
