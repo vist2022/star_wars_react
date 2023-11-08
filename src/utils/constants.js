@@ -58,14 +58,3 @@ export const starWarsDescription = 'Star Wars (retroactively retitled Star Wars:
     ' in addition to two anthology films and various television series.'
 
 
-// import friend1 from '../styles/images/friends_img/friend1.jpg';
-// import friend2 from '../styles/images/friends_img/friend2.jpg';
-// import friend3 from '../styles/images/friends_img/friend3.jpg';
-// import friend4 from '../styles/images/friends_img/friend4.jpg';
-// import friend5 from '../styles/images/friends_img/friend5.jpg';
-// import friend6 from '../styles/images/friends_img/friend6.jpg';
-// import friend7 from '../styles/images/friends_img/friend7.jpg';
-// import friend8 from '../styles/images/friends_img/friend8.jpg';
-// import friend9 from '../styles/images/friends_img/friend9.jpg';
-//
-// const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9]

@@ -7,6 +7,7 @@ export const getRandomEpisode = async () => {
     const randomIndex = Math.floor(Math.random() * (data.length - 1) + 1);
     return data[randomIndex]
 
+
 }
 
 export  const getPersonInfo = async (person)=>

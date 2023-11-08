@@ -1,19 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {contextStarWars} from "../utils/contextStarWars";
 
 
 const Friend = ({image}) => {
+    const {changeImages} = useContext(contextStarWars)
     return (
-        <contextStarWars.Consumer>
-            {value =>
-                <>
-                    <img
-                        className="col-4 p-1"
-                        src={image} alt="friend"
-                        onClick={()=>value.changeImages(image)}/>
-                </>
-            }
-        </contextStarWars.Consumer>
+        <>
+            <img
+                className="col-4 p-1"
+                src={image} alt="friend"
+                onClick={() => changeImages(image)}
+            />
+        </>
     );
 };
 

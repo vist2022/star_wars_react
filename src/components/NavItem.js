@@ -1,25 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {contextStarWars} from "../utils/contextStarWars";
 
 const NavItem = (props) => {
 
-
+    const {changePage} = useContext(contextStarWars)
     return (
-<contextStarWars.Consumer>
-    {value =>
         <li
             className="nav-item btn btn-danger border border-light rounded-pill mx-1 common-btn"
-            onClick={()=>value.changePage(props.text)}
+            onClick={() => changePage(props.text)}
         >{props.text}</li>
-    }
-</contextStarWars.Consumer>
-
-
-
-
-
-
-
     );
 };
 
